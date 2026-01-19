@@ -118,7 +118,6 @@ export const Signup = () => {
                 className={styles.bar}
               />
               <br />
-
               <br />
             </div>
             <div className={styles.signupbtn}>
