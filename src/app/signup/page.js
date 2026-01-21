@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 
 
-export const Signup = () => {
+const Signup = () => {
   
   const [userData, setUserData] = useState({
     name: "",
@@ -127,7 +127,7 @@ export const Signup = () => {
               </Button>
             </div>
             <div className={styles.loginLink}>
-              already have an account? <Link href={"/login"}>log in</Link>
+              already have an account? <Link href={"/login"}>login</Link>
             </div>
           </form>
         </div>
@@ -135,3 +135,4 @@ export const Signup = () => {
     );
   }
 
+export default Signup
