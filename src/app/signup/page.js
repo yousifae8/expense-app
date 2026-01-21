@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 
 
-export const Signup = () => {
+const Signup = () => {
   
   const [userData, setUserData] = useState({
     name: "",
@@ -134,3 +134,4 @@ export const Signup = () => {
     );
   }
 
+export default Signup
