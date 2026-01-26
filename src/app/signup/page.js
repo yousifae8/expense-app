@@ -2,136 +2,269 @@
 import { Button } from "@mui/material";
 import styles from "./signup.module.css";
 import supabase from "../supabase";
-import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import * as yup from "yup"
+import {useFormik} from "formik"
 
 const Signup = () => {
-  
-  const [userData, setUserData] = useState({
-    name: "",
-    age: "",
-    email: "",
-    password: "",
-  })
-  const router = useRouter()
-  
-  const addNewUser = async (event) => {
-    event.preventDefault()
 
-    try {
-      const { data, error } = await supabase.auth.signUp(
-        {
-          email: userData.email,
-          password: userData.password,
-          options: {
-            data: {
-              name: userData.name,
-              age: userData.age
+
+  const validationSchema = yup.object().shape({
+    name: yup
+      .string()
+      .min(2, "Name must be at least 2 characters")
+      .matches(/^[A-Za-z]+$/, "Name can only contain letters and spaces")
+      .required("Name is required"),
+    age: yup
+      .number()
+      .min(13, "You must be at least 13")
+      .max(120, "Age must be realistic")
+      .required("Age is required"),
+    email: yup
+      .string()
+      .email("Invalid email format")
+      .required("Email is required"),
+    password: yup
+      .string()
+      .min(8, "Password must be at least 8 characters")
+      .matches(/[A-Z]/, "Must contain an uppercase letter")
+      .matches(/[a-z]/, "Must contain a lowercase letter")
+      .matches(/[0-9]/, "Must contain a number")
+      .matches(/[@$!%*?&]/, "Must contain a special character")
+      .required("Password is required"),
+  });
+  
+
+    const addNewUser = async (values) => {
+      
+    
+      try {
+        const { data, error } = await supabase.auth.signUp(
+          {
+            email: values.email,
+            password: values.password,
+            options: {
+              data: {
+                name: values.name,
+                age: values.age
+              }
             }
           }
+        )
+
+    
+    
+      
+        
+        if (error) {
+          alert("Error signing up: " + error.message);
+          return
         }
-      )
-
- 
-
-      
-      setUserData({
-        email: "",
-        password: "",
-        name: "",
-        age: ""
-      })
-      if (error) {
-        alert("Error signing up: " + error.message);
-        return
+        router.push("/login")
+    
+        
+      } catch (error) {
+        alert("Error signing up: ", error.message)
       }
-      router.push("/login")
-  
-      
-    } catch (error) {
-      alert("Error signing up: ", error.message)
-    }
   }
+  
 
-    return (
-      <div className={styles.container}>
-        <div className={styles.signup}>
-          <form onSubmit={addNewUser} className={styles.form}>
-            <h1 className={styles.header}> Sign Up </h1>
+  const formik = useFormik({
+    initialValues: {
+      name: "", 
+      email: "",
+      password: "",
+      age : ""
+    },
+    validationSchema,
+    onSubmit: addNewUser
+})
 
-            <div className={styles.bargroup}>
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <br />
+
+  const router = useRouter()
+  
+
+  return (
+    <div className={styles.outer}>
+      <div className={styles.signup}>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
+          <div className={styles.wallet}>
+            <AccountBalanceWalletIcon
+              sx={{
+                background: "linear-gradient(45deg, #6a11cb, #2575fc)",
+                height: 50,
+                width: 50,
+                marginTop: 1,
+                borderRadius: 3,
+                padding: 1,
+              }}
+            />
+          </div>
+          <div className={styles.header}>
+            <h1> Create Account </h1>
+            <p className={styles.paragraph}>
+              join us and start tracking your expenses
+            </p>
+          </div>
+
+          <div className={styles.bargroup}>
+            <label
+              htmlFor="name"
+              className={styles.label}
+              style={{ marginBottom: 5 }}>
+              Name
+            </label>
+
+            <div style={{ position: "relative" }}>
+              <PersonOutlineIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  bottom: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
               <input
+                style={{ width: "100%", paddingLeft: "35px" }}
                 required
-                value={userData.name}
-                onChange={(e) => setUserData({ ...userData,name: e.target.value })}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                // value={userData.name}
+                // onChange={(e) =>
+                //   setUserData({ ...userData, name: e.target.value })
+                // }
                 type="text"
-                placeholder="Name"
+                placeholder="Your name"
                 name="name"
                 className={styles.bar}
               />
-              <br />
-              <label htmlFor="age" className="label">
-                Age
-              </label>
-              <br />
+            </div>
+            {formik.touched.name && formik.errors.name && (
+              <p className={styles.error}>{formik.errors.name}</p>
+            )}
+
+            <label htmlFor="age" className={styles.label}>
+              Age
+            </label>
+            <div style={{ position: "relative" }}>
+              <CalendarTodayOutlinedIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  bottom: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
               <input
+                style={{ width: "100%", paddingLeft: "35px" }}
                 required
-                value={userData.age}
-                onChange={(e) => setUserData({...userData, age: e.target.value })}
+                // value={userData.age}
+                // onChange={(e) =>
+                //   setUserData({ ...userData, age: e.target.value })
+                // }
+                value={formik.values.age}
+                onChange={formik.handleChange}
                 type="number"
-                placeholder="Age"
+                placeholder="Your age"
                 name="age"
                 className={styles.bar}
               />
-              <br />
-              <label htmlFor="email" className="label">
-                Email
-              </label>
-              <br />
+            </div>
+            {formik.touched.age && formik.errors.age && (
+              <p className={styles.error}>{formik.errors.age}</p>
+            )}
+            <label htmlFor="email" className={styles.label}>
+              Email
+            </label>
+            <div style={{ position: "relative" }}>
+              <EmailOutlinedIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  bottom: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
               <input
+                style={{ width: "100%", paddingLeft: "35px" }}
                 required
-                value={userData.email}
-                onChange={(e) => setUserData({...userData, email: e.target.value })}
+                // value={userData.email}
+                // onChange={(e) =>
+                //   setUserData({ ...userData, email: e.target.value })
+                // }
+                value={formik.values.email}
+                onChange={formik.handleChange}
                 name="email"
                 type="email"
-                placeholder="you@exampl.com"
+                placeholder="you@example.com"
                 className={styles.bar}
               />
-              <br />
-              <label htmlFor="password" className="label">
-                Password
-              </label>
-              <br />
+            </div>
+            {formik.touched.email && formik.errors.email && (
+              <p className={styles.error}>{formik.errors.email}</p>
+            )}
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
+            <div style={{ position: "relative" }}>
+              <LockOutlinedIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  bottom: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
               <input
-                value={userData.password}
-                onChange={(e) => setUserData({...userData, password: e.target.value })}
+                style={{ width: "100%", paddingLeft: "35px" }}
+                // value={userData.password}
+                // onChange={(e) =>
+                //   setUserData({ ...userData, password: e.target.value })
+
+                // }
+                value={formik.values.password}
+                onChange={formik.handleChange}
                 name="password"
                 type="password"
                 placeholder="Password"
                 className={styles.bar}
               />
-              <br />
-              <br />
             </div>
-            <div className={styles.signupbtn}>
-              <Button variant="contained" type="submit" >
-                signup
-              </Button>
-            </div>
-            <div className={styles.loginLink}>
-              already have an account? <Link href={"/login"}>login</Link>
-            </div>
-          </form>
-        </div>
+            {formik.touched.password && formik.errors.password && (
+              <p className={styles.error}>{formik.errors.password}</p>
+            )}
+          </div>
+          <div className={styles.signupbtn}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{
+                width: "100%",
+                background: "linear-gradient(45deg, #6a11cb, #2575fc)",
+              }}>
+              signup
+            </Button>
+          </div>
+          <div className={styles.loginLink}>
+            already have an account?{" "}
+            <Link href={"/login"} className={styles.login}>
+              log in
+            </Link>
+          </div>
+        </form>
       </div>
-    );
+    </div>
+  );
   }
 
 export default Signup
