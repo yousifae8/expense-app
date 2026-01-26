@@ -136,10 +136,7 @@ const Signup = () => {
                 required
                 value={formik.values.name}
                 onChange={formik.handleChange}
-                // value={userData.name}
-                // onChange={(e) =>
-                //   setUserData({ ...userData, name: e.target.value })
-                // }
+               
                 type="text"
                 placeholder="Your name"
                 name="name"
@@ -166,10 +163,7 @@ const Signup = () => {
               <input
                 style={{ width: "100%", paddingLeft: "35px" }}
                 required
-                // value={userData.age}
-                // onChange={(e) =>
-                //   setUserData({ ...userData, age: e.target.value })
-                // }
+               
                 value={formik.values.age}
                 onChange={formik.handleChange}
                 type="number"
@@ -197,10 +191,7 @@ const Signup = () => {
               <input
                 style={{ width: "100%", paddingLeft: "35px" }}
                 required
-                // value={userData.email}
-                // onChange={(e) =>
-                //   setUserData({ ...userData, email: e.target.value })
-                // }
+           
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 name="email"
@@ -227,11 +218,7 @@ const Signup = () => {
               />
               <input
                 style={{ width: "100%", paddingLeft: "35px" }}
-                // value={userData.password}
-                // onChange={(e) =>
-                //   setUserData({ ...userData, password: e.target.value })
-
-                // }
+             
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 name="password"

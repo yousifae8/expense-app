@@ -20,7 +20,7 @@ const router = useRouter()
       return
     }
       const { data, error } = await supabase.from("expenses").insert({
-        title: "groceries",
+      
         amount: values.amount,
         category: values.category,
         date: values.date,
