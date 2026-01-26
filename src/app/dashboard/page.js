@@ -15,11 +15,6 @@ import EditCalendarIcon from "@mui/icons-material/EditCalendar";
   
 
 const Dashboard = () => {
-
-    
-  
-
-
   const router = useRouter();
   const [amount, setAmount] = useState()
   const [categories, setCategories] = useState({
@@ -88,8 +83,6 @@ const Dashboard = () => {
     transportCategory()
     otherCategory()
   },[])
-  // foodCategory()
-  // console.log(categories);
 
 
 
@@ -123,7 +116,7 @@ const insertData = async () => {
     return
   }
     const { data, error } = await supabase.from("expenses").insert({
-      title: "groceries",
+      
       amount: 20,
       category: "Other",
       user_id: user.id
@@ -153,8 +146,10 @@ const insertData = async () => {
         <h1>${amount}</h1>
       </div>
       <div className={styles.calender}>
-
-        <EditCalendarIcon />
+       
+        
+        <EditCalendarIcon onClick={()=> router.push("/expenses")} />
+        
 
       </div>
       <div className={styles.categories}>

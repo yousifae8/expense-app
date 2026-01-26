@@ -1,7 +1,4 @@
-body{
-  background: #FAF3E0;
-  color: white;
-}
+/* 
 .container{
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
@@ -49,4 +46,31 @@ height: 10px;
 .signupLink{
   margin: auto;
   margin-top: 20px;
+} */
+
+
+
+
+.container{
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  max-width: 600px;
+  flex-direction: column;
+width: 100%;
+  background-color:rgb(255, 255, 255);
+  height: 650px;
+  margin-top: 40px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 3px 3px 100px rgb(173, 173, 173);
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 10px;
+  /* .signupbtn{
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+  } */
+
+  
 }

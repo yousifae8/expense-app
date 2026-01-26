@@ -11,7 +11,7 @@ width: 100%;
   margin-top: 40px;
   border-radius: 8px;
   border: none;
-  box-shadow: 3px 3px 100px rgb(173, 173, 173);
+  box-shadow: 3px 3px 100px rgba(255, 255, 255, 0.661);
   margin-right: auto;
   margin-left: auto;
   padding-top: 10px;

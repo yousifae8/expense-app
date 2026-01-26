@@ -1,6 +1,7 @@
 :root {
-  --background: #eeeeee;
-  --foreground: #171717;
+  height: 100vh;
+  --background: radial-gradient(1000px,#020024, #090979, #00D4FF )
+  /* --foreground: #171717; */
 }
 
 @media (prefers-color-scheme: dark) {
