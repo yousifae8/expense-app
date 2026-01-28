@@ -1,3 +1,8 @@
+body{
+    background: linear-gradient(45deg, #ffffff, #5a93f7);
+    
+}
+
 .container{
   display: flex;
   justify-content: center;
@@ -6,7 +11,6 @@
   margin-left: auto;
   margin-right: auto;
   height: 600px;
-  
   flex-direction: column;
  
 }
@@ -14,7 +18,7 @@
 
 
 .input{
- width: 400px;
+ width: 350px;
  height: 45px;
  margin: 10px;
  border-radius: 4px ;
@@ -22,21 +26,23 @@
 padding: 10px;
 }
 .innerContainer{
+  background : linear-gradient(45deg, #6b11cb65, #2574fc65);
 
   display: flex;
   justify-content: center;
   height: 500px;
-  box-shadow: 1px 1px 5px;
+  box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.812);
 margin: auto;
-width: 450px;
+width: 400px;
 background-color: rgba(169, 169, 169, 0.34);
 border-radius: 8px;
 flex-direction: column;
+position: relative;
 
 }
 .header{
 margin: auto;
-color: rgba(46, 5, 253, 0.623);
+color: rgba(255, 255, 255, 1);
 margin-top: 60px;
 }
 
@@ -49,4 +55,17 @@ margin-top: 60px;
 
 .options{
   display: inline;
+}
+.close{
+  color: white;
+ position: absolute;
+ top: 10;
+ right: 10;
+ cursor: pointer;
+}
+
+.error{
+  color: rgb(255, 255, 255);
+  margin-left:15px;
+
 }

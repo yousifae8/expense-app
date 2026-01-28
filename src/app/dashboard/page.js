@@ -146,10 +146,8 @@ const insertData = async () => {
         <h1>${amount}</h1>
       </div>
       <div className={styles.calender}>
-       
-        
-        <EditCalendarIcon onClick={()=> router.push("/expenses")} />
-        
+
+        <EditCalendarIcon />
 
       </div>
       <div className={styles.categories}>
