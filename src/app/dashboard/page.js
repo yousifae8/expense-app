@@ -9,8 +9,9 @@ import styles from "./dashboard.module.css";
 import supabase from "../supabase";
 import { useEffect, useState } from "react";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
-
-
+import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 
   
 
@@ -22,7 +23,7 @@ const Dashboard = () => {
     transport: null,
     other: null
   })
-
+const [open, setOpen] = useState(false)
 
   const redirect = (event) => {
     event.preventDefault()
@@ -139,8 +140,86 @@ const insertData = async () => {
     <div className={styles.container}>
       <div className={styles.header}>
 <h1>Expense Tracker</h1>
+        <AccountBalanceWallet
+          className={styles.wallet}
+          sx={{
+            background: "linear-gradient(45deg, #6a11cb, #2575fc)",
+            height: 50,
+            width: 50,
+            marginTop: 1,
+            borderRadius: 3,
+            padding: 1,
+          }}
+        />
+        <div className={styles.innerContainer}>
+          <div>
+            <h1 className={styles.title}>Expense Tracker</h1>
+          </div>
+          <div>
+            <p>Welcome back, {userName}</p>
+          </div>
+        </div>
+        
+        <button onClick={()=> setOpen(!open)} className={styles.toggle}>
+              {open ? "✕" : "☰"}
+        </button>
 
+          <div className={`${styles.headerButtons} ${open? styles.active : ""}`}>
+
+
+              <Button
+                sx={{
+                  width: 120,
+                  height: 50,
+                }}
+                onClick={totalSpent}
+                variant="contained">
+                total
+              </Button>
+          <Button
+            sx={{
+              width: 120,
+              height: 50,
+            }}
+            onClick={getTotalPerCurrentMonth}
+            variant="contained">
+            this month
+          </Button>
+          <Button
+            sx={{
+              width: 120,
+              height: 50,
+            }}
+            onClick={() => {
+              router.push("/expenses")
+            }}
+            variant="contained">
+            expenses
+          </Button>
+          <Button
+            sx={{
+              width: 120,
+              height: 50,
+              background: "white",
+              color: "black",
+       
+            }}
+            variant="contained"
+            onClick={logout}
+         >
+            {isLoggedIn ? "Logout" : "login"} { isLoggedIn? <LogoutIcon sx={{
+              marginLeft: 1,
+              
+              
+            }} />: <LoginIcon sx={{
+              marginLeft: 1,
+              
+              
+            }} /> }
+          </Button>
+        </div>
       </div>
+
       <div className={styles.totalSpent}>
         <h1>Total Spent</h1>
         <h1>${amount}</h1>
@@ -168,7 +247,7 @@ const insertData = async () => {
       <Button
         variant="contained"
         onClick={redirect}
-        sx={{ fontSize: 20, margin: 1, width: 300 }}>
+        sx={{ fontSize: 20, marginBottom: 20, width: 250 }}>
         <AddIcon sx={{ fontSize: 25 }} />
         add expense
       </Button>
