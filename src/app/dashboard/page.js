@@ -25,10 +25,50 @@ const Dashboard = () => {
   })
 const [open, setOpen] = useState(false)
 
-  const redirect = (event) => {
-    event.preventDefault()
-    router.push("/add")
+  const getTotalPerCurrentMonth = async () => {
+    const { data, error } = await supabase
+      .from("expenses")
+      .select("amount, date")
+      .filter("date", "gte", `2026-${currentMonth}-01`)
+      .filter("date", "lte", `2026-${currentMonth}-31`);
+    const total = data.reduce((acc, current) => {
+     return acc + current.amount
+    },0)
+    
+setAmount(total)
+
+
+    
+   
+  };
+
+
+
+
+
+  const logUser = async () => {
+
+     const {
+       data: { user },
+     } = await supabase.auth.getUser();
+     if (!user) {
+   
+       return;
+     }
+  const { data, error } = await supabase.auth.getUser();
+  const name = await data.user.user_metadata.name
+    setUserName(name.charAt(0).toUpperCase() + name.slice(1))
+    setIsLoggedIn(true)
+    
 }
+
+  useEffect(() => {
+  logUser()
+},[])
+
+
+
+
   const foodCategory = async () => {
     
     const { data, error } = await supabase.from("expenses").select("amount").eq("category", "Food")
@@ -246,7 +286,7 @@ const insertData = async () => {
       </div>
       <Button
         variant="contained"
-        onClick={redirect}
+        onClick={()=> router.push("/add")}
         sx={{ fontSize: 20, marginBottom: 20, width: 250 }}>
         <AddIcon sx={{ fontSize: 25 }} />
         add expense
