@@ -10,7 +10,7 @@ body{
  display: flex;
  justify-content: center;
  padding: 10px;
-width: 90%;
+width: 100%;
 background: white;
 margin: auto;
 margin-top: 20px;
@@ -21,7 +21,6 @@ background-size: contain;
 }
 
 .modal{
-/* display: block; */
 position: fixed;
 z-index: 1;
 left: 0;
@@ -92,7 +91,6 @@ box-shadow: 1px 1px 5px gray;
 .btnOne, .btnTwo{
   cursor: pointer;
   background: orange;
-  padding: 10px;
   border-radius: 8px;
 }
 .btnTwo{
@@ -163,7 +161,6 @@ border-radius: 8px;
   height: 80px;
   border-radius: 8px;
 align-items: center;
-width: 98%;
 margin: 10px;
 }
 .category{
@@ -187,4 +184,68 @@ width: fit-content;
 }
 .amountContainer{
   width: 100px;
+}
+
+@media (max-width: 900px){
+  .header{
+    font-size: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+body{
+  padding: 10px;
+}
+.container{
+
+margin: 0;
+width: 100%;
+}
+   .tableHead{
+    font-size: 14px;
+    padding: 20px;
+    padding-right: 200px;
+    gap: 3px;
+   }
+   .btnOne,.btnTwo{
+width: 50px;
+height: 30px;  
+ }
+ .btnTwo{
+  right: 20;
+  top: 10;
+ }
+  .btnOne{
+  right: 20;
+  top: 50;
+ }
+
+}
+
+@media (max-width: 800px){
+  .tableHead{
+    font-size:10px ;
+    gap: 3px;
+    padding-right: 250px;
+  }
+  .item{
+    padding-right: 200px;
+    font-size: 12px;
+    padding-left: 20px;
+    gap: 10;
+  }
+  .category{
+    margin: 0;
+  }
+  .innerContainer{
+    text-align: center;
+  }
+
+}
+@media (min-width: 900px){
+  .btnOne, .btnTwo{
+    padding: 10px;
+  }
+  .header{
+    width: 100%;
+  }
 }
