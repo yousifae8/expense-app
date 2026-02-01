@@ -60,7 +60,7 @@ const Login = () => {
         </div>
       </form>
       <div className={styles.signupLink}>
-        don't have an account? <Link href={"/signup"}> signup </Link>
+       don&apos t have an account? <Link href={"/signup"}> signup </Link>
       </div>
     </div>
   );

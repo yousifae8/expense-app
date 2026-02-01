@@ -3,7 +3,7 @@
   --background: radial-gradient(1000px,#020024, #090979, #00D4FF )
   /* --foreground: #171717; */
 }
-
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
