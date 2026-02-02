@@ -16,6 +16,18 @@ import LoginIcon from "@mui/icons-material/Login";
   
 
 const Dashboard = () => {
+  const [userName, setUserName] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const currentMonth = new Date().getMonth() + 1;
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      alert("error logging out");
+      return
+    }
+    setIsLoggedIn(false)
+    router.push("/login")
+  };
   const router = useRouter();
   const [amount, setAmount] = useState()
   const [categories, setCategories] = useState({

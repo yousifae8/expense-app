@@ -53,7 +53,7 @@
   justify-content: end;
   cursor: pointer;
 }
-/* .header{
+.header{
   margin-right: 60%; 
   background: linear-gradient(90deg, rgba(50, 200, 20, 0.4)0%,rgba(224, 224, 15, 0.4) 50%, rgba(20, 146, 200, 0.4) 100% );
   width: 90%;
