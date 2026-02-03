@@ -262,6 +262,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
 export default function Expenses() {
@@ -375,7 +378,27 @@ export default function Expenses() {
               }}
               className={styles.input}
             />
-            <select
+              <Box sx={{ minWidth: 120,backgroundColor: "#f5f5f5" , padding:0}} className={styles.input}>
+                  <Select
+                  style={{ border: " none", margin:0, width: "100%"}}
+                 
+                    displayEmpty
+                                  value={data.category}
+                                                className={styles.input}
+
+ onChange={(e) => {
+                setData({ ...data, category: e.target.value });
+              }}
+                  >
+                    <MenuItem value="" disabled>
+                      Select category...
+                    </MenuItem>
+                    <MenuItem value={"Food"}>Food</MenuItem>
+                    <MenuItem value={"Transport"}>Transport</MenuItem>
+                    <MenuItem value={"Other"}>Other</MenuItem>
+                  </Select>
+                </Box>
+            {/* <select
               name=""
               id=""
               className={styles.input}
@@ -386,7 +409,7 @@ export default function Expenses() {
               <option value="Food">Food</option>
               <option value="Transport">Transport</option>
               <option value="Other">Other</option>
-            </select>
+            </select> */}
             <Button
               variant="contained"
               sx={{

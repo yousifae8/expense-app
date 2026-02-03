@@ -52,11 +52,6 @@ margin-top: 60px;
 } */
 
 
-body{
-    background: linear-gradient(45deg, #ffffff, #5a93f7);
-    
-}
-
 .container{
   display: flex;
   justify-content: center;
@@ -66,18 +61,19 @@ body{
   margin-right: auto;
   height: 600px;
   flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
  
 }
 
 
 
 .input{
- width: 350px;
- height: 45px;
+ height: 40px;
  margin: 10px;
  border-radius: 4px ;
  border:  none;
 padding: 10px;
+
 }
 .innerContainer{
   background : linear-gradient(45deg, #6b11cb65, #2574fc65);
@@ -105,6 +101,7 @@ margin-top: 60px;
   flex-direction: column;
   margin: auto;
   margin-bottom: 60px;
+  padding-bottom:20px;
 }
 
 .options{
@@ -123,3 +120,4 @@ margin-top: 60px;
   margin-left:15px;
 
 }
+

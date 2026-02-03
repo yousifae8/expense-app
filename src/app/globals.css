@@ -1,11 +1,9 @@
-:root {
-  --background: radial-gradient(1000px,#020024, #090979, #00D4FF )
-  /* --foreground: #171717; */
-}
 body{
-  background: linear-gradient(45deg, #ffffff, #5a93f7);
-/* height: 9999; */
+  background: radial-gradient(circle, #ffffff, #5a93f7) ;
 }
+/* body{
+  background: linear-gradient(45deg, #ffffff, #5a93f7);
+} */
 /*
 
 @media (prefers-color-scheme: dark) {

@@ -131,7 +131,9 @@ import supabase from "../supabase";
 import CloseIcon from "@mui/icons-material/Close";
 import * as yup from "yup"
 import {useFormik} from "formik"
-
+import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const Add = () => {
 const router = useRouter()
@@ -204,8 +206,7 @@ const validationSchema = yup.object().shape({
            {formik.touched.amount && formik.errors.amount && (
                         <p className={styles.error}>{formik.errors.amount}</p>
                       )}
-          <br />
-
+{/* 
           <select
             required
             name="category"
@@ -222,7 +223,8 @@ const validationSchema = yup.object().shape({
             {formik.touched.category && formik.errors.category && (
                         <p className={styles.error}>{formik.errors.category}</p>
                       )}
-          <br />
+          <br /> */}
+      
 
           <input
             required
@@ -234,7 +236,27 @@ const validationSchema = yup.object().shape({
           />
           {formik.touched.date && formik.errors.date && (
           <p className={styles.error}>{formik.errors.date}</p>)}
-          <br />
+              <Box sx={{ minWidth: 120,backgroundColor: "#f5f5f5" , padding:0}} className={styles.input}>
+      <Select
+      style={{ width: "100%", height: "100%" ,border: " none"}}
+        value={formik.values.category}
+        onChange={(e)=>{
+          formik.setFieldValue("category", e.target.value)
+        }}
+        displayEmpty
+        inputProps={{ 'aria-label': 'Without label' }}
+      >
+        <MenuItem value="" disabled>
+          Select category...
+        </MenuItem>
+        <MenuItem value={"Food"}>Food</MenuItem>
+        <MenuItem value={"Transport"}>Transport</MenuItem>
+        <MenuItem value={"Other"}>Other</MenuItem>
+      </Select>
+    </Box>
+    {formik.touched.category && formik.errors.category && (
+                        <p className={styles.error}>{formik.errors.category}</p>
+                      )}
 
           <div className={styles.btn}>
             <Button
@@ -242,6 +264,7 @@ const validationSchema = yup.object().shape({
               sx={{
                 width: 350,
                 margin: "10px",
+                height: 40 ,
               }}
               type="submit">
               save

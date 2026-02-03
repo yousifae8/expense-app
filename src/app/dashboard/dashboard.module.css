@@ -307,7 +307,7 @@ color: white;
 margin-left: auto;
 position: absolute;
 right: 10;
-top: 10;
+top: 40;
 
 }
 @media (min-width: 950px){
@@ -323,7 +323,7 @@ top: 10;
     flex-direction: column;
     background-color: white;
     width: fit-content;
-    margin-top: 220px;
+    margin-top: 250px;
     display: none;
     margin-right: 40px;
 
