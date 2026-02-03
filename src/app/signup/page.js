@@ -121,18 +121,17 @@ const Signup = () => {
               Name
             </label>
 
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className={styles.iconContainer} >
               <PersonOutlineIcon
                 sx={{
                   position: "absolute",
                   left: 10,
-                  bottom: 10,
                   color: "grey",
                   width: "20px",
                 }}
               />
               <input
-                style={{ width: "100%", paddingLeft: "35px" }}
+                style={{ width: "90%", paddingLeft: "35px" }}
                 required
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -150,18 +149,17 @@ const Signup = () => {
             <label htmlFor="age" className={styles.label}>
               Age
             </label>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className={styles.iconContainer}>
               <CalendarTodayOutlinedIcon
                 sx={{
                   position: "absolute",
                   left: 10,
-                  bottom: 10,
                   color: "grey",
                   width: "20px",
                 }}
               />
               <input
-                style={{ width: "100%", paddingLeft: "35px" }}
+                style={{ width: "90%", paddingLeft: "35px" }}
                 required
                
                 value={formik.values.age}
@@ -178,18 +176,17 @@ const Signup = () => {
             <label htmlFor="email" className={styles.label}>
               Email
             </label>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className={styles.iconContainer}>
               <EmailOutlinedIcon
                 sx={{
                   position: "absolute",
                   left: 10,
-                  bottom: 10,
                   color: "grey",
                   width: "20px",
                 }}
               />
               <input
-                style={{ width: "100%", paddingLeft: "35px" }}
+                style={{ width: "90%", paddingLeft: "35px" }}
                 required
            
                 value={formik.values.email}
@@ -206,18 +203,17 @@ const Signup = () => {
             <label htmlFor="password" className={styles.label}>
               Password
             </label>
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} className={styles.iconContainer}>
               <LockOutlinedIcon
                 sx={{
                   position: "absolute",
                   left: 10,
-                  bottom: 10,
                   color: "grey",
                   width: "20px",
                 }}
               />
               <input
-                style={{ width: "100%", paddingLeft: "35px" }}
+                style={{ width: "90%", paddingLeft: "35px" }}
              
                 value={formik.values.password}
                 onChange={formik.handleChange}
