@@ -6,36 +6,83 @@ import styles from "./login.module.css";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
+import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Login = () => {
   const router = useRouter();
   const [userData, setUserData] = useState({ email: "", password: "" });
-
+  const [wrong, setWrong] = useState("none")
+const [loading, setLoading] = useState("none")
+const [alertmsg, setAlertmsg] = useState("none")
   const signIn = async (event) => {
     event.preventDefault();
 
-    try {
+    try { 
       const { data, error } = await supabase.auth.signInWithPassword({
         email: userData.email,
         password: userData.password,
-      });
+      }); 
       if (error) {
-        alert("wrong email or password!");
+
+        setTimeout(() => {
+          setWrong("block");
+          setLoading("none");
+        },1000)
+
+        
         return;
       }
       router.push("/dashboard");
+
     } catch (error) {
-      alert("something went wrong");
-    }
+
+
+      setAlertmsg("block")
+      setLoading("none")
+      return;   }
+      setLoading("block")   
+
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.login}>
       <form onSubmit={signIn}>
+         <div className={styles.wallet}>
+            <AccountBalanceWalletIcon
+              sx={{
+                background: "linear-gradient(45deg, #6a11cb, #2575fc)",
+                height: 50,
+                width: 50,
+                marginTop: 1,
+                borderRadius: 3,
+                padding: 1,
+              }}
+            />
+          </div>
         <div className={styles.header}>
           <h1>Expense App</h1>
         </div>
+        <div className={styles.alert} style={{display: wrong}}>
+          <p>Wrong email or password</p>
+        </div>
+         <div className={styles.alert} style={{display: loading}}>
+          <p>Loading...</p>
+        </div>
+         <div className={styles.alert} style={{display: alertmsg}}>
+        </div>  
         <div className={styles.bargroup}>
+          <label htmlFor="email" className={styles.label}>Email</label>
+          <div style={{ position: "relative" }} className={styles.iconContainer}>
+              <EmailOutlinedIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
           <input
             type="email"
             className={styles.bar}
@@ -44,6 +91,20 @@ const Login = () => {
               setUserData({ ...userData, email: e.target.value })
             }
           />
+          </div>
+        </div>
+        <div className={styles.bargroup}>
+          <label htmlFor="password" className={styles.label}>Password</label>
+            <div style={{ position: "relative" }} className={styles.iconContainer}>
+              <LockOutlinedIcon
+                sx={{
+                  position: "absolute",
+                  left: 10,
+                  color: "grey",
+                  width: "20px",
+                }}
+              />
+          
           <input
             type="password"
             className={styles.bar}
@@ -52,9 +113,22 @@ const Login = () => {
               setUserData({ ...userData, password: e.target.value })
             }
           />
+          </div>
         </div>
         <div className={styles.loginbtn}>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit"  sx={{
+                width: "100%",
+                background: "linear-gradient(45deg, #6a11cb, #2575fc)",
+              }}
+              onClick={()=> {
+                setWrong("none")
+                setAlertmsg("none")
+                setLoading("block") 
+
+                  
+              }}
+              
+              >
             Login
           </Button>
         </div>

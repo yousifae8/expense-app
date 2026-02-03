@@ -91,7 +91,7 @@ const Signup = () => {
   
 
   return (
-    <div className={styles.outer}>
+    <div>
       <div className={styles.signup}>
         <form onSubmit={formik.handleSubmit} className={styles.form}>
           <div className={styles.wallet}>
