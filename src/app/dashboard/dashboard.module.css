@@ -137,21 +137,17 @@ background: none;
  */
 
 
-body{
-  background: linear-gradient(45deg, #ffffff, #5a93f7);
-  padding-left: 40px;
-  padding-right: 40px ;
-}
+
 
 .container{
   text-align: center;
   position: relative;
-  width: 95%;
   margin: auto ;
   border: none;
   border-radius: 8px;
-  height: 100vh;
 padding-top: 60px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;  
 }
 .totalSpent{
   margin-bottom: 50px;
@@ -160,37 +156,48 @@ padding-top: 60px;
   height: 150px;
   border-radius: 8px;
   display: flex;
+
+padding-top: 20px;
   justify-content: center;
-  justify-items: center;
   flex-direction: column;
   .headerText{
+    font-size: 25px;  
+    padding-top: 50px;
 color: white;
+font-weight: bold;
+margin-bottom: 0px;
+
 
   }
-  .amount{
+  .p{
     color: white;
-    font-size: 45px;
+    font-size: 64px;
+    padding-bottom: 20px;
+    margin-top: 0px;
+    font-weight: bold;
   }
 }
 
-.categories{
-  display: flex;
-
-justify-content: space-evenly;
+.categories
+{
   font-weight: bold;
   margin: auto auto 50px auto;
   height: 100px;
-
-.span{
+display: flex;
+gap: 20px;  
+}
+/* .span{
  height: 120px;
  padding-top: 30px;
  padding-bottom: 30px;
  background: #ffffff;
  border-radius: 8px;
- display: flex;
  padding-left: 30px;
  border: none;
  box-shadow: 0.1px 0.1px 5px gray ;
+ margin-right: auto;
+ margin-left: auto;
+ margin-top: 20px;
  .spanHeader{
   padding-top: 4px;
  }
@@ -204,16 +211,47 @@ justify-content: space-evenly;
 }
 
 
+} */
+.title{
+  margin-bottom: 0px;
 }
+
+.span{
+ height: 120px;
+  padding-left: 30px;
+  background: #ffffff;
+  text-align: left;
+  border-radius: 8px;
+  box-shadow: 0.1px 0.1px 5px gray ;  
+display: flex;
+align-items: center;
+justify-content: flex-start;
+
+
+}
+
+
+.spanHeader{
+  padding-left: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: gray;
+  margin:0;
+}
+.spanPrice{
+  padding-left: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  margin:0;
+} 
+
+
 .span:hover{
 box-shadow: 2px 2px 5px gray;
 transform: scale(1.02);
 transition: .3s ease;
 }
-.midSpan{
-  border-right: 1px solid rgba(128, 128, 128, 0.5);
-  border-left: 1px solid rgba(128, 128, 128, 0.5);
-}
+
 
 .wallet{
   text-align: center;
@@ -222,18 +260,16 @@ transition: .3s ease;
   margin: auto;
   border: 3px solid white; 
   position: absolute;
-  left: 10;
-  top: 0;
+  left: 20;
+  top: 40;
 }
 .header{
-
   height: 100px;
-  position: absolute;
-  width: 100%;
-  border-radius: 8px;
+  width: 90%;
   padding: 10px;
   display: flex;
   padding-left: 90px;
+  margin-right: 200px;
 
 
 }
@@ -245,57 +281,69 @@ transition: .3s ease;
 }
 
 .spanContent{
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+
   margin-left: 20px;
+
 }
 
 .headerButtons{
   display: flex;
   justify-content: flex-end;
   gap: 10;
-  margin-left:auto;
-  
+
+}
+
+.mobileMenu{
+
+  margin-left: auto;
+  width: 20%;
+  margin-right: 10px;
 }
 
 .toggle{
 display: none;
 background: none;
+color: white;
+margin-left: auto;
 position: absolute;
 right: 10;
-top: 2;
-color: white;
+top: 10;
+
 }
 @media (min-width: 950px){
 .span{
-  width: 32%;
+  width: 100%;
 }
 }
 
 @media(max-width: 950px){
 
+  
   .headerButtons{
     flex-direction: column;
     background-color: white;
     width: fit-content;
     margin-top: 220px;
     display: none;
+    margin-right: 40px;
 
   }
   .title{
     font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 0px;
   }
+
   .categories{
     flex-direction: column;
 width: 100%;
 height:500px ;
 }
-  .span{
+  /* .span{
     height: 150px;
     display: flex;
     align-items: center;
-  }
+  } */
   .toggle{
     display: block;
     font-size: 36px;
@@ -307,3 +355,8 @@ background: none;
 }
 }
 
+.welcomeBack{
+  font-size: 20px;
+  color: gray;
+  margin-top: 10px;
+}

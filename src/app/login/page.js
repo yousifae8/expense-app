@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { set } from "react-hook-form";
 
 const Login = () => {
   const router = useRouter();
@@ -24,9 +25,11 @@ const [alertmsg, setAlertmsg] = useState("none")
         email: userData.email,
         password: userData.password,
       }); 
-      if (error) {
+      if (error || !data.user) {
+
 
         setTimeout(() => {
+
           setWrong("block");
           setLoading("none");
         },1000)
@@ -39,11 +42,10 @@ const [alertmsg, setAlertmsg] = useState("none")
     } catch (error) {
 
 
-      setAlertmsg("block")
-      setLoading("none")
-      return;   }
-      setLoading("block")   
-
+        setAlertmsg("block")
+        setLoading("none")
+        return;   }
+          
   };
 
   return (
@@ -67,10 +69,11 @@ const [alertmsg, setAlertmsg] = useState("none")
         <div className={styles.alert} style={{display: wrong}}>
           <p>Wrong email or password</p>
         </div>
-         <div className={styles.alert} style={{display: loading}}>
+         <div className={styles.loading} style={{display: loading}}>
           <p>Loading...</p>
         </div>
          <div className={styles.alert} style={{display: alertmsg}}>
+          <p>Something went wrong. Please try again later.</p>
         </div>  
         <div className={styles.bargroup}>
           <label htmlFor="email" className={styles.label}>Email</label>
@@ -120,12 +123,10 @@ const [alertmsg, setAlertmsg] = useState("none")
                 width: "100%",
                 background: "linear-gradient(45deg, #6a11cb, #2575fc)",
               }}
-              onClick={()=> {
-                setWrong("none")
-                setAlertmsg("none")
-                setLoading("block") 
-
-                  
+              onClick={()=>{
+                setLoading("block");
+                setWrong("none");
+                setAlertmsg("none");  
               }}
               
               >
@@ -134,7 +135,7 @@ const [alertmsg, setAlertmsg] = useState("none")
         </div>
       </form>
       <div className={styles.signupLink}>
-        don't have an account? <Link href={"/signup"}> signup </Link>
+        {`don't have an account?` }<Link href={"/signup"}> sign up </Link>
       </div>
     </div>
   );

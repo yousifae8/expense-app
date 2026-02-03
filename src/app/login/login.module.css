@@ -216,6 +216,7 @@ margin-top: 20px;
   margin-top: 10px;
   color: white;
   margin: auto;
+  
 
 }
 
@@ -255,3 +256,7 @@ margin-top: 20px;
   margin-bottom: 50px;
 }   
 
+.loading{
+ background-color: none;
+ text-align: center;
+}

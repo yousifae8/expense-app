@@ -202,7 +202,7 @@ const Dashboard = () => {
   const [isLoggedIn , setIsLoggedIn] = useState()
   const [userName, setUserName] = useState("")
   const router = useRouter();
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState()
   const [categories, setCategories] = useState({
     food: 0,
     transport: 0,
@@ -214,13 +214,18 @@ const [open, setOpen] = useState(false)
     const { data, error } = await supabase
       .from("expenses")
       .select("amount, date")
-      .filter("date", "gte", `2026-${currentMonth}-01`)
-      .filter("date", "lte", `2026-${currentMonth}-31`);
-    const total = data.reduce((acc, current) => {
+      .filter("date", "gte", `2026-${currentMonth < 10 ? `0${currentMonth}` : currentMonth}-01`)
+      .filter("date", "lte", `2026-${currentMonth < 10 ? `0${currentMonth}` :  currentMonth}-28`) // assuming 28 days in a month for simplicity
+    const total = data?.reduce((acc, current) => {
      return acc + current.amount
     },0)
-    
-setAmount(total)
+    if(error){
+      console.log("error fetching", error);
+      return
+    } 
+   
+setAmount(total) 
+
 
 
     
@@ -295,6 +300,7 @@ setAmount(total)
     }
     const total = data.reduce((acc, item) => {
       return acc + item.amount
+      
     }, 0)
     setCategories((prev) => {
      return {...prev, other: total}
@@ -372,14 +378,14 @@ setAmount(total)
             <h1 className={styles.title}>Expense Tracker</h1>
           </div>
           <div>
-            <p>Welcome back, {userName}</p>
+            <p className={styles.welcomeBack}>Welcome back, {userName}</p>
           </div>
         </div>
-        
+      <div className={styles.mobileMenu}>
         <button onClick={()=> setOpen(!open)} className={styles.toggle}>
               {open ? "✕" : "☰"}
         </button>
-
+</div>
           <div className={`${styles.headerButtons} ${open? styles.active : ""}`}>
 
 
@@ -438,7 +444,7 @@ setAmount(total)
 
       <div className={styles.totalSpent}>
         <h3 className={styles.headerText}>Total Spent</h3>
-        <h1 className={styles.amount}>${amount.toLocaleString()}</h1>
+        <p className={styles.p}>${amount?.toLocaleString("")}</p>
       </div>
 
       <div className={styles.categories}>
@@ -494,7 +500,7 @@ setAmount(total)
       <Button
         variant="contained"
         onClick={()=> router.push("/add")}
-        sx={{ fontSize: 20, marginBottom: 20, width: 250 }}>
+        sx={{ fontSize: 20, marginBottom: 20, width: 250, marginTop: 3}}>
         <AddIcon sx={{ fontSize: 25 }} />
         add expense
       </Button>
