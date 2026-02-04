@@ -1,9 +1,25 @@
-:root {
-  height: 100vh;
-  --background: radial-gradient(1000px,#020024, #090979, #00D4FF )
-  /* --foreground: #171717; */
+.layout{
+marign-left:auto;
+
+margin-right:auto;
+align-items:center;
+height:auto;
+font-family: Arial
 }
+
+
+/* body {
+  background: #F8FAFC;
+  font-family: Arial, Helvetica, sans-serif;
+  background-size: cover;
+} */
+
+
+/* body{
+  background: linear-gradient(45deg, #ffffff, #5a93f7);
+} */
 /*
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

@@ -1,3 +1,186 @@
+// 'use client'
+// import { useRouter } from "next/navigation";
+// import { Button } from "@mui/material";
+// import AddIcon from "@mui/icons-material/Add";
+// import RestaurantIcon from "@mui/icons-material/Restaurant"
+// import DirectionsCarIcon from "@mui/icons-material/DirectionsCar"
+// import LocalMallIcon from "@mui/icons-material/LocalMall";
+// import styles from "./dashboard.module.css";
+// import supabase from "../supabase";
+// import { useEffect, useState } from "react";
+// import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+
+
+
+  
+
+// const Dashboard = () => {
+//   const router = useRouter();
+//   const [amount, setAmount] = useState()
+//   const [categories, setCategories] = useState({
+//     food: null,
+//     transport: null,
+//     other: null
+//   })
+
+
+//   const redirect = (event) => {
+//     event.preventDefault()
+//     router.push("/add")
+// }
+//   const foodCategory = async () => {
+    
+//     const { data, error } = await supabase.from("expenses").select("amount").eq("category", "Food")
+//     if (error) {
+//       console.log("error fetching");
+//     }
+
+//     const total = data.reduce((acc, item) => {
+//       return acc + item.amount;
+//     }, 0);
+//     setCategories((prev) => {
+//       return { ...prev, food: total };
+//     });
+//   }
+//   const transportCategory = async () => {
+//    const { data, error } = await supabase
+//      .from("expenses")
+//      .select("amount")
+//      .eq("category", "Transport");
+//    if (error) {
+//      console.log("error fetching");
+//     }
+//     const total = data.reduce((acc, item) => {
+//       return acc + item.amount;
+//     }, 0);
+//     setCategories((prev) => {
+//       return { ...prev, transport: total };
+//     });
+   
+    
+//   }
+//   const otherCategory = async () => {
+//     const { data, error } = await supabase
+//       .from("expenses")
+//       .select("amount")
+//       .eq("category", "Other");
+//     if (error) {
+//       console.log("error fetching");
+//     }
+//     const total = data.reduce((acc, item) => {
+//       return acc + item.amount
+//     }, 0)
+//     setCategories((prev) => {
+//      return {...prev, other: total}
+//     })
+//   }
+    
+   
+    
+  
+//   useEffect(() => {
+//     foodCategory()
+//     transportCategory()
+//     otherCategory()
+//   },[])
+
+
+
+//   const totalSpent = async () => {
+//     const { data: { user }} = await supabase.auth.getUser()
+//     if (!user) {
+//       console.log("not logged in");
+//       return
+      
+//     }
+//     const { data, error } = await supabase.from("expenses").select("amount")
+//     if (error) {
+//       console.log("error fetching");
+//       return
+      
+//     }
+  
+//     const total = data.reduce((acc, item) => {
+//       return acc + item.amount
+//     }, 0)
+    
+//    setAmount(total)
+    
+//   }
+
+//   totalSpent()
+// const insertData = async () => {
+//   const { data: { user } } = await supabase.auth.getUser()
+//   if (!user) {
+//     console.log("not logged in");
+//     return
+//   }
+//     const { data, error } = await supabase.from("expenses").insert({
+      
+//       amount: 20,
+//       category: "Other",
+//       user_id: user.id
+//     }).select()
+//     if (error) {
+//       console.error("error fetching");
+//       return
+      
+//     }
+    
+    
+
+    
+    
+//   }
+
+
+
+//   return (
+//     <div className={styles.container}>
+//       <div className={styles.header}>
+// <h1>Expense Tracker</h1>
+
+//       </div>
+//       <div className={styles.totalSpent}>
+//         <h1>Total Spent</h1>
+//         <h1>${amount}</h1>
+//       </div>
+//       <div className={styles.calender}>
+       
+        
+//         <EditCalendarIcon onClick={()=> router.push("/expenses")} />
+        
+
+//       </div>
+//       <div className={styles.categories}>
+//         <span className={styles.span}>
+//           <RestaurantIcon /> <br />
+//           Food <p>${categories.food}</p>
+//         </span>
+//         <span className={`${styles.span} ${styles.midSpan}`}>
+//           <DirectionsCarIcon /> <br />
+//           Transport
+//           <p>${categories.transport}</p>
+//         </span>
+//         <span className={styles.span}>
+//          <LocalMallIcon /> <br />
+//           Other<p>${categories.other}</p>
+//         </span>
+//       </div>
+//       <Button
+//         variant="contained"
+//         onClick={redirect}
+//         sx={{ fontSize: 20, margin: 1, width: 300 }}>
+//         <AddIcon sx={{ fontSize: 25 }} />
+//         add expense
+//       </Button>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+
 'use client'
 import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
@@ -8,32 +191,22 @@ import LocalMallIcon from "@mui/icons-material/LocalMall";
 import styles from "./dashboard.module.css";
 import supabase from "../supabase";
 import { useEffect, useState } from "react";
-import EditCalendarIcon from "@mui/icons-material/EditCalendar";
-import AccountBalanceWallet from "@mui/icons-material/AccountBalanceWallet";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { AccountBalanceWallet } from "@mui/icons-material";
 import LoginIcon from "@mui/icons-material/Login";
-
   
 
 const Dashboard = () => {
+  const now = new Date()
+  const currentMonth = now.getMonth() + 1
+  const [isLoggedIn , setIsLoggedIn] = useState()
   const [userName, setUserName] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const currentMonth = new Date().getMonth() + 1;
-  const logout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      alert("error logging out");
-      return
-    }
-    setIsLoggedIn(false)
-    router.push("/login")
-  };
   const router = useRouter();
   const [amount, setAmount] = useState()
   const [categories, setCategories] = useState({
-    food: null,
-    transport: null,
-    other: null
+    food: 0,
+    transport: 0,
+    other: 0
   })
 const [open, setOpen] = useState(false)
 
@@ -41,13 +214,18 @@ const [open, setOpen] = useState(false)
     const { data, error } = await supabase
       .from("expenses")
       .select("amount, date")
-      .filter("date", "gte", `2026-${currentMonth}-01`)
-      .filter("date", "lte", `2026-${currentMonth}-31`);
-    const total = data.reduce((acc, current) => {
+      .filter("date", "gte", `2026-${currentMonth < 10 ? `0${currentMonth}` : currentMonth}-01`)
+      .filter("date", "lte", `2026-${currentMonth < 10 ? `0${currentMonth}` :  currentMonth}-28`) // assuming 28 days in a month for simplicity
+    const total = data?.reduce((acc, current) => {
      return acc + current.amount
     },0)
-    
-setAmount(total)
+    if(error){
+      console.log("error fetching", error);
+      return
+    } 
+   
+setAmount(total) 
+
 
 
     
@@ -122,6 +300,7 @@ setAmount(total)
     }
     const total = data.reduce((acc, item) => {
       return acc + item.amount
+      
     }, 0)
     setCategories((prev) => {
      return {...prev, other: total}
@@ -131,18 +310,12 @@ setAmount(total)
    
     
   
-  useEffect(() => {
-    foodCategory()
-    transportCategory()
-    otherCategory()
-  },[])
-
-
-
+  
+  
   const totalSpent = async () => {
     const { data: { user }} = await supabase.auth.getUser()
     if (!user) {
-      console.log("not logged in");
+      
       return
       
     }
@@ -152,46 +325,43 @@ setAmount(total)
       return
       
     }
-  
+    
     const total = data.reduce((acc, item) => {
       return acc + item.amount
     }, 0)
     
-   setAmount(total)
+    setAmount(total)
     
   }
-
-  totalSpent()
-const insertData = async () => {
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) {
-    console.log("not logged in");
-    return
-  }
-    const { data, error } = await supabase.from("expenses").insert({
-      
-      amount: 20,
-      category: "Other",
-      user_id: user.id
-    }).select()
-    if (error) {
-      console.error("error fetching");
-      return
-      
+  
+  
+  
+  useEffect(() => {
+      setTimeout(() => {
+      foodCategory()
+      transportCategory()
+      otherCategory()
+      totalSpent()
+    }, 1000)
+  
+  },[])
+  
+  const logout = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+     router.push("/login");
+      return;
     }
-    
-    
-
-    
-    
-  }
-
+    const { error } = await supabase.auth.signOut({ scope: "local" });
+    router.push("/login")
+}
 
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-<h1>Expense Tracker</h1>
         <AccountBalanceWallet
           className={styles.wallet}
           sx={{
@@ -208,14 +378,14 @@ const insertData = async () => {
             <h1 className={styles.title}>Expense Tracker</h1>
           </div>
           <div>
-            <p>Welcome back, {userName}</p>
+            <p className={styles.welcomeBack}>Welcome back, {userName}</p>
           </div>
         </div>
-        
-        <button onClick={()=> setOpen(!open)} className={styles.toggle}>
+      <div className={styles.mobileMenu}>
+        <button style={{color:"blue"}} onClick={()=> setOpen(!open)} className={styles.toggle}>
               {open ? "✕" : "☰"}
         </button>
-
+</div>
           <div className={`${styles.headerButtons} ${open? styles.active : ""}`}>
 
 
@@ -273,33 +443,64 @@ const insertData = async () => {
       </div>
 
       <div className={styles.totalSpent}>
-        <h1>Total Spent</h1>
-        <h1>${amount}</h1>
+        <h3 className={styles.headerText}>Total Spent</h3>
+        <p className={styles.p}>${amount?.toLocaleString("")}</p>
       </div>
-      <div className={styles.calender}>
 
-        <EditCalendarIcon />
-
-      </div>
       <div className={styles.categories}>
         <span className={styles.span}>
-          <RestaurantIcon /> <br />
-          Food <p>${categories.food}</p>
+          <div>
+            <RestaurantIcon
+              sx={{
+                width: "50px",
+                height: "50px",
+                color: "orangered",
+              }}
+            />
+            <br />
+          </div>
+          <div className={styles.spanContent}>
+            <p className={styles.spanHeader}>Food</p>
+            <p className={styles.spanPrice}>${categories.food.toLocaleString()}</p>
+          </div>
         </span>
         <span className={`${styles.span} ${styles.midSpan}`}>
-          <DirectionsCarIcon /> <br />
-          Transport
-          <p>${categories.transport}</p>
+          <div>
+            <DirectionsCarIcon
+              sx={{
+                width: "50px",
+                height: "50px",
+                color: "blue",
+              }}
+            />
+            <br />
+          </div>
+          <div className={styles.spanContent}>
+            <p className={styles.spanHeader}>Transport</p>
+            <p className={styles.spanPrice}>${categories.transport.toLocaleString()}</p>
+          </div>
         </span>
         <span className={styles.span}>
-         <LocalMallIcon /> <br />
-          Other<p>${categories.other}</p>
+          <div>
+            <LocalMallIcon
+              sx={{
+                width: "50px",
+                height: "50px",
+                color: "#60b9fc",
+              }}
+            />
+            <br />
+          </div>
+          <div className={styles.spanContent}>
+            <p className={styles.spanHeader}> Other </p>
+            <p className={styles.spanPrice}>${categories.other.toLocaleString()}</p>
+          </div>
         </span>
       </div>
       <Button
         variant="contained"
         onClick={()=> router.push("/add")}
-        sx={{ fontSize: 20, marginBottom: 20, width: 250 }}>
+        sx={{ fontSize: 20, marginBottom: 20, width: 250, marginTop: 3}}>
         <AddIcon sx={{ fontSize: 25 }} />
         add expense
       </Button>

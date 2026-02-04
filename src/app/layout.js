@@ -6,6 +6,8 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -19,8 +21,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} layout`}>
+
+
         {children}
+
+
+
       </body>
     </html>
   );
