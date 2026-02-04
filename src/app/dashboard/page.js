@@ -310,22 +310,12 @@ setAmount(total)
    
     
   
-  useEffect(() => {
-      setTimeout(() => {
-      foodCategory()
-      transportCategory()
-      otherCategory()
-      totalSpent()
-    }, 1000)
   
-  },[])
-
-
-
+  
   const totalSpent = async () => {
     const { data: { user }} = await supabase.auth.getUser()
     if (!user) {
-   
+      
       return
       
     }
@@ -335,17 +325,27 @@ setAmount(total)
       return
       
     }
-  
+    
     const total = data.reduce((acc, item) => {
       return acc + item.amount
     }, 0)
     
-   setAmount(total)
+    setAmount(total)
     
   }
-
-
-
+  
+  
+  
+  useEffect(() => {
+      setTimeout(() => {
+      foodCategory()
+      transportCategory()
+      otherCategory()
+      totalSpent()
+    }, 1000)
+  
+  },[])
+  
   const logout = async () => {
     const {
       data: { user },
@@ -382,7 +382,7 @@ setAmount(total)
           </div>
         </div>
       <div className={styles.mobileMenu}>
-        <button onClick={()=> setOpen(!open)} className={styles.toggle}>
+        <button style={{color:"blue"}} onClick={()=> setOpen(!open)} className={styles.toggle}>
               {open ? "✕" : "☰"}
         </button>
 </div>

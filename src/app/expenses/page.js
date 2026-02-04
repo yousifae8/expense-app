@@ -357,7 +357,7 @@ export default function Expenses() {
               position: "absolute",
               right: 5,
               top: 5,
-              color: "white",
+              color: "black",
             }}
           />
           <div className={styles.innerContent}>
@@ -437,7 +437,7 @@ export default function Expenses() {
                   position: "absolute",
                   right: 5,
                   top: 5,
-                  color: "white",
+                  color: "black",
                 }}
                 onClick={() => setIsDeletionModalOpen(false)}
                 className={styles.crossicon}
@@ -493,9 +493,9 @@ export default function Expenses() {
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <div className={styles.tableHead}>
-            <h2>Date</h2>
-            <h2>Category</h2>
-            <h2>Amount</h2>
+            <div>Date</div>
+            <div>Category</div>
+            <div>Amount</div>
           </div>
           <div className={styles.dashboard}>
             {items.map((item) => {
@@ -534,16 +534,9 @@ export default function Expenses() {
                   <div className={styles.amountContainer}>
                     <p className={styles.amount}> {item.amount.toLocaleString()}</p>
                   </div>
-                  <button
-                    onClick={() => {
-                      setIsDeletionModalOpen(true);
-                      setDeleteItem(item.id);
-                    }}
-                    className={styles.btnOne}>
-                    Delete
-                  </button>
-                  <button
-                    className={styles.btnTwo}
+                  <div className={styles.btn}>
+                  <Button
+                    // className={styles.btnTwo}
                     onClick={() => {
                       setIsModalOpen(!isModalOpen);
                       {
@@ -554,9 +547,28 @@ export default function Expenses() {
                           id: item.id,
                         });
                       }
-                    }}>
+                    }}
+                    variant="contained"
+sx={{                      fontWeight: "bold"
+}}
+                    
+                    >
                     Edit
-                  </button>
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setIsDeletionModalOpen(true);
+                      setDeleteItem(item.id);
+                    }}
+                    // className={styles.btnOne}
+                    variant="contained"
+                    sx={{background: "orangered",
+                      fontWeight: "bold"
+                    }}
+                    >
+                    Delete
+                  </Button>
+                  </div>
                 </div>
               );
             })}

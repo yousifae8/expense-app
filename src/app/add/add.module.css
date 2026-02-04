@@ -76,15 +76,23 @@ padding: 10px;
 
 }
 .innerContainer{
-  background : linear-gradient(45deg, #6b11cb65, #2574fc65);
+
+
+  background: white;
+  /* border: 1px solid #E2E8F0; */
+
+
+
+
+
 
   display: flex;
   justify-content: center;
   height: 500px;
-  box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.812);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.84);
 margin: auto;
 width: 400px;
-background-color: rgba(169, 169, 169, 0.34);
+background-color: rgba(50, 39, 253, 0.82);
 border-radius: 8px;
 flex-direction: column;
 position: relative;

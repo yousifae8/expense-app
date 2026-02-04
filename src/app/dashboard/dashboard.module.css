@@ -150,9 +150,14 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px;  
 }
 .totalSpent{
+
+  background: #2563EB;
+  color: white;
+
+
+
   margin-bottom: 50px;
   margin-top: 150px;
-  background: linear-gradient(90deg, rgba(48, 255, 203, 0.6), rgba(29, 29, 255, 0.599));
   height: 150px;
   border-radius: 8px;
   display: flex;
@@ -217,9 +222,18 @@ gap: 20px;
 }
 
 .span{
+
+
+
+  background: white;
+  border: 1px solid #E2E8F0;
+
+
+
+
+
  height: 120px;
   padding-left: 30px;
-  background: #ffffff;
   text-align: left;
   border-radius: 8px;
   box-shadow: 0.1px 0.1px 5px gray ;  
@@ -247,6 +261,7 @@ justify-content: flex-start;
 
 
 .span:hover{
+  border-color: #2563EB;
 box-shadow: 2px 2px 5px gray;
 transform: scale(1.02);
 transition: .3s ease;
