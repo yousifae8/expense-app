@@ -1,52 +1,79 @@
-/* 
-.container{
+.login{
   font-family: Arial, Helvetica, sans-serif;
   display: flex;
   max-width: 600px;
   flex-direction: column;
-width: 32%;
-  background-color:rgba(156, 156, 156, 0.274);
-  height: 600px;
+  width: 100%;
+  background-color:rgb(255, 255, 255);
+  height: 650px;
   margin-top: 40px;
   border-radius: 8px;
   border: none;
-  box-shadow: 1px 1px 10px ;
+  box-shadow: 3px 3px 100px rgba(255, 255, 255, 0.661);
   margin-right: auto;
   margin-left: auto;
-  
+  padding-top: 10px;
+    .loginbtn{
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+  }
+}
+
+/* .container{
+  height: 100vh;
+  margin: auto;
+  max-width: 400px;
+} */
+.wallet{
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+  margin: auto;
 }
 .header{
-background: teal;
-text-align: center;
-padding: 20px;
-border-radius: 8px;
-}
-.bargroup{
-margin-top: 60px;
+
+ display: flex;
+ justify-content: center;
+ flex-wrap: wrap;
+ gap: 10;
+ .paragraph{
+  color: gray;
+  margin-bottom: 50px;
+ }}
+
+ .bargroup{
+
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  gap: 20px;
+  padding: 30px;
+.label{
+margin-bottom: 5px;
+margin-top: 5px;
+font-size: 12px;
+margin-left: 5px;
 
 }
+margin-bottom: 50px;
 
+}
 .bar{
-  border-radius: 8px;
-  background-color: #ffffff;
-border: navajowhite;
-padding: 26px;
-height: 10px;
-}
+  border-radius:8px;
+  background-color: #00000016;
+  border: none;
+  padding: 15px;
 
-.loginbtn{
-  
-    text-align: center;
+
+}
+.bar:focus{
+  outline:none;
+ 
 }
 
 .signupLink{
   margin: auto;
   margin-top: 20px;
-} */
+} 
 
 
 
