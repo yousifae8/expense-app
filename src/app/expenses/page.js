@@ -357,7 +357,7 @@ alert("Please login first!")
               position: "absolute",
               right: 5,
               top: 5,
-              color: "black",
+              color: "white",
             }}
           />
           <div className={styles.innerContent}>
@@ -437,7 +437,7 @@ alert("Please login first!")
                   position: "absolute",
                   right: 5,
                   top: 5,
-                  color: "black",
+                  color: "white",
                 }}
                 onClick={() => setIsDeletionModalOpen(false)}
                 className={styles.crossicon}
@@ -548,7 +548,6 @@ alert("Please login first!")
                         });
                       }
                     }}
-                    variant="contained"
 sx={{                      fontWeight: "bold"
 }}
                     
@@ -561,8 +560,8 @@ sx={{                      fontWeight: "bold"
                       setDeleteItem(item.id);
                     }}
                     // className={styles.btnOne}
-                    variant="contained"
-                    sx={{background: "orangered",
+                    
+                    sx={{color: "red",
                       fontWeight: "bold"
                     }}
                     >
