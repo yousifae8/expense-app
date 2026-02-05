@@ -15,17 +15,36 @@ import {useFormik} from "formik"
 const Signup = () => {
 
 
+
+
+
   const validationSchema = yup.object().shape({
     name: yup
       .string()
       .min(2, "Name must be at least 2 characters")
       .matches(/^[A-Za-z]+$/, "Name can only contain letters and spaces")
       .required("Name is required"),
+    // age: yup
+    //   .number()
+    //   .min(13, "You must be at least 13")
+    //   .max(120, "Age must be realistic")
+    //   .required("Age is required"),
     age: yup
-      .number()
-      .min(13, "You must be at least 13")
-      .max(120, "Age must be realistic")
-      .required("Age is required"),
+  .date()
+  .typeError("Please select a valid date")
+  .required("Birth date is required")
+  .test("min-age", "You must be at least 13", (value) => {
+    if (!value) return false;
+    const birthYear = new Date(value).getFullYear();
+    const currentYear = new Date().getFullYear();
+    return currentYear - birthYear >= 13;
+  })
+  .test("max-age", "Age must be realistic", (value) => {
+    if (!value) return false;
+    const birthYear = new Date(value).getFullYear();
+    const currentYear = new Date().getFullYear();
+    return currentYear - birthYear <= 120;
+  }),
     email: yup
       .string()
       .email("Invalid email format")
@@ -42,7 +61,10 @@ const Signup = () => {
   
 
     const addNewUser = async (values) => {
-      
+
+  const birthYear = new Date(values.age).getFullYear()
+  const currentYear = new Date().getFullYear()
+  const calculatedAge = currentYear - birthYear
     
       try {
         const { data, error } = await supabase.auth.signUp(
@@ -52,12 +74,13 @@ const Signup = () => {
             options: {
               data: {
                 name: values.name,
-                age: values.age
+                age:  calculatedAge
               }
             }
           }
         )
 
+    console.log(calculatedAge);
     
     
       
@@ -164,7 +187,7 @@ const Signup = () => {
                
                 value={formik.values.age}
                 onChange={formik.handleChange}
-                type="number"
+                type="date"
                 placeholder="Your age"
                 name="age"
                 className={styles.bar}

@@ -136,7 +136,7 @@ background-color: rgba(0, 0, 0, 0.4);
 
 .modalContainer{
   /* background: rgb(255, 255, 255); */
-    background: #3e71ff;
+    background: #ffffff;
 
   width: 300px;
   height: 300px;
@@ -229,7 +229,7 @@ box-shadow: 1px 1px 5px gray;
 
 .iconscontainer{
   
-  background: #3e71ff;
+  background: #ffffff;
   width: 300px;
   height: 300px;
   display: flex;
@@ -257,7 +257,7 @@ border-radius: 8px;
   top: 5;
 }
 .paragraph{
-  color: white;
+  color: #1f2937;
   position:fixed;
   top: 400;
   

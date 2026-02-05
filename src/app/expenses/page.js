@@ -357,7 +357,7 @@ alert("Please login first!")
               position: "absolute",
               right: 5,
               top: 5,
-              color: "white",
+              color: "black",
             }}
           />
           <div className={styles.innerContent}>
@@ -437,7 +437,7 @@ alert("Please login first!")
                   position: "absolute",
                   right: 5,
                   top: 5,
-                  color: "white",
+                  color: "black",
                 }}
                 onClick={() => setIsDeletionModalOpen(false)}
                 className={styles.crossicon}

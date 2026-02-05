@@ -461,7 +461,7 @@ setAmount(total)
 
       <div className={styles.totalSpent}>
         <h3 className={styles.headerText}>Total Spent</h3>
-        <p className={styles.p}>${amount ? amount.toLocaleString(""): 0}</p>
+        <p className={styles.p}>${amount ? amount.toLocaleString(): 0}</p>
       </div>
 
       <div className={styles.categories}>
