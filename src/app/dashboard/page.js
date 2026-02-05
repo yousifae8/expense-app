@@ -210,6 +210,9 @@ const Dashboard = () => {
   })
 const [open, setOpen] = useState(false)
 
+
+
+
   const getTotalPerCurrentMonth = async () => {
     const { data, error } = await supabase
       .from("expenses")
@@ -242,7 +245,7 @@ setAmount(total)
        data: { user },
      } = await supabase.auth.getUser();
      if (!user) {
-   
+   setIsLoggedIn(false)
        return;
      }
   const { data, error } = await supabase.auth.getUser();
@@ -253,7 +256,10 @@ setAmount(total)
 }
 
   useEffect(() => {
-  logUser()
+    setTimeout(() => {
+      logUser()
+      
+    }, 300);
 },[])
 
 
@@ -378,7 +384,11 @@ setAmount(total)
             <h1 className={styles.title}>Expense Tracker</h1>
           </div>
           <div>
-            <p className={styles.welcomeBack}>Welcome back, {userName}</p>
+            <p className={styles.welcomeBack}>
+              {isLoggedIn ? `Welcome back, ${userName}` : "Please login first!" }
+              
+              
+              </p>
           </div>
         </div>
       <div className={styles.mobileMenu}>
@@ -393,6 +403,8 @@ setAmount(total)
                 sx={{
                   width: 120,
                   height: 50,
+                                fontWeight:"bold",
+
                 }}
                 onClick={totalSpent}
                 variant="contained">
@@ -402,6 +414,8 @@ setAmount(total)
             sx={{
               width: 120,
               height: 50,
+                            fontWeight:"bold",
+
             }}
             onClick={getTotalPerCurrentMonth}
             variant="contained">
@@ -411,6 +425,8 @@ setAmount(total)
             sx={{
               width: 120,
               height: 50,
+                            fontWeight:"bold",
+
             }}
             onClick={() => {
               router.push("/expenses")
@@ -424,6 +440,7 @@ setAmount(total)
               height: 50,
               background: "white",
               color: "black",
+              fontWeight:"bold",
        
             }}
             variant="contained"
@@ -435,7 +452,7 @@ setAmount(total)
               
             }} />: <LoginIcon sx={{
               marginLeft: 1,
-              
+
               
             }} /> }
           </Button>
@@ -444,7 +461,7 @@ setAmount(total)
 
       <div className={styles.totalSpent}>
         <h3 className={styles.headerText}>Total Spent</h3>
-        <p className={styles.p}>${amount?.toLocaleString("")}</p>
+        <p className={styles.p}>${amount ? amount.toLocaleString(""): 0}</p>
       </div>
 
       <div className={styles.categories}>
@@ -455,6 +472,7 @@ setAmount(total)
                 width: "50px",
                 height: "50px",
                 color: "orangered",
+
               }}
             />
             <br />
@@ -500,7 +518,8 @@ setAmount(total)
       <Button
         variant="contained"
         onClick={()=> router.push("/add")}
-        sx={{ fontSize: 20, marginBottom: 20, width: 250, marginTop: 3}}>
+        sx={{ fontSize: 20, marginBottom: 20, width: 250, marginTop: 3,              fontWeight:"bold",
+}}>
         <AddIcon sx={{ fontSize: 25 }} />
         add expense
       </Button>

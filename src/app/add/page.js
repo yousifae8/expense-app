@@ -137,7 +137,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 const Add = () => {
 const router = useRouter()
-const [select, setSelect] = useState("none")
 
 const validationSchema = yup.object().shape({
   category: yup
@@ -191,7 +190,7 @@ const validationSchema = yup.object().shape({
     <div className={styles.container}>
       <div className={styles.innerContainer}>
 
-        <CloseIcon onClick={()=> router.push("/dashboard")} className={ styles.close } />
+        <CloseIcon  onClick={()=> router.push("/dashboard")} className={ styles.close } />
         <h1 className={styles.header}>ADD EXPENSES</h1>
         <form onSubmit={formik.handleSubmit} className={styles.form}>
           <input
@@ -265,6 +264,8 @@ const validationSchema = yup.object().shape({
                 width: 350,
                 margin: "10px",
                 height: 40 ,
+                              fontWeight:"bold",
+
               }}
               type="submit">
               save

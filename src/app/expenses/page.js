@@ -295,7 +295,7 @@ export default function Expenses() {
       data: { user },
     } = await supabase.auth.getUser();
     if (!user) {
-      console.log("not logged in");
+alert("Please login first!")
       return;
     }
     const { data: expenses, error } = await supabase

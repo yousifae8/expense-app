@@ -228,7 +228,7 @@ box-shadow: 1px 1px 5px gray;
 .iconscontainer{
   
   background: #3e71ff;
-  /* width: 300px; */
+  width: 300px;
   height: 300px;
   display: flex;
   position: relative;
